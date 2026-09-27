@@ -29,10 +29,6 @@ const toast =
     document.getElementById("toast");
 
 
-/* =========================
-   SAVE CART
-========================= */
-
 function saveCart() {
 
     localStorage.setItem(
@@ -42,10 +38,6 @@ function saveCart() {
 
 }
 
-
-/* =========================
-   CART COUNT
-========================= */
 
 function updateCartCount() {
 
@@ -60,10 +52,6 @@ function updateCartCount() {
 
 }
 
-
-/* =========================
-   DISPLAY CART
-========================= */
 
 function displayCart() {
 
@@ -81,7 +69,6 @@ function displayCart() {
             "none";
 
         return;
-
     }
 
 
@@ -95,7 +82,7 @@ function displayCart() {
     cart.forEach(product => {
 
         const item =
-            document.createElement("div");
+            document.createElement("article");
 
 
         item.className =
@@ -106,7 +93,10 @@ function displayCart() {
 
             <div class="cart-item-image">
 
-                ${product.icon}
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                >
 
             </div>
 
@@ -114,9 +104,7 @@ function displayCart() {
             <div class="cart-item-details">
 
                 <span class="cart-category">
-
                     ${product.category}
-
                 </span>
 
                 <h3>
@@ -131,9 +119,7 @@ function displayCart() {
                     class="remove-item"
                     data-id="${product.id}"
                 >
-
                     Remove
-
                 </button>
 
             </div>
@@ -180,13 +166,8 @@ function displayCart() {
 
 
     calculateTotals();
-
 }
 
-
-/* =========================
-   CALCULATE TOTAL
-========================= */
 
 function calculateTotals() {
 
@@ -201,13 +182,6 @@ function calculateTotals() {
             0
         );
 
-
-    /*
-       Example shipping rule:
-
-       ₱120 shipping below ₱1,500
-       FREE shipping at ₱1,500+
-    */
 
     const shipping =
         subtotal >= 1500
@@ -231,13 +205,8 @@ function calculateTotals() {
 
     totalElement.textContent =
         `₱${total.toLocaleString()}`;
-
 }
 
-
-/* =========================
-   CART BUTTONS
-========================= */
 
 cartItems.addEventListener(
     "click",
@@ -258,19 +227,14 @@ cartItems.addEventListener(
             );
 
 
-        /* INCREASE */
-
         if (
             event.target.classList
                 .contains("increase")
         ) {
 
             product.quantity++;
-
         }
 
-
-        /* DECREASE */
 
         if (
             event.target.classList
@@ -278,6 +242,7 @@ cartItems.addEventListener(
         ) {
 
             product.quantity--;
+
 
             if (product.quantity <= 0) {
 
@@ -288,11 +253,8 @@ cartItems.addEventListener(
                     );
 
             }
-
         }
 
-
-        /* REMOVE */
 
         if (
             event.target.classList
@@ -309,7 +271,6 @@ cartItems.addEventListener(
             showToast(
                 "Product removed from cart"
             );
-
         }
 
 
@@ -321,10 +282,6 @@ cartItems.addEventListener(
 );
 
 
-/* =========================
-   CHECKOUT
-========================= */
-
 document
     .getElementById("checkoutButton")
     .addEventListener(
@@ -332,21 +289,16 @@ document
         () => {
 
             showToast(
-                "Checkout page coming next!"
+                "Checkout will be added next."
             );
 
         }
     );
 
 
-/* =========================
-   TOAST
-========================= */
-
 function showToast(message) {
 
-    toast.textContent =
-        message;
+    toast.textContent = message;
 
     toast.classList.add("show");
 
@@ -364,7 +316,5 @@ function showToast(message) {
 
 }
 
-
-/* INITIAL LOAD */
 
 displayCart();

@@ -1,6 +1,6 @@
-/* ==============================
-   PRODUCT DATABASE
-================================ */
+/* ========================================
+   LITTLE STEPS PRODUCT DATABASE
+======================================== */
 
 const products = [
 
@@ -9,7 +9,7 @@ const products = [
         name: "Extra Soft Baby Wipes",
         category: "diapers",
         price: 149,
-        icon: "🧻",
+        image: "images/products/baby-wipes.jpg",
         badge: "BEST SELLER",
         rating: 5
     },
@@ -19,7 +19,7 @@ const products = [
         name: "Gentle Baby Lotion",
         category: "bath",
         price: 229,
-        icon: "🧴",
+        image: "images/products/baby-lotion.jpg",
         badge: "NEW",
         rating: 5
     },
@@ -29,7 +29,7 @@ const products = [
         name: "Gentle Baby Wash",
         category: "bath",
         price: 249,
-        icon: "🧴",
+        image: "images/products/baby-wash.jpg",
         badge: "NEW",
         rating: 5
     },
@@ -39,17 +39,17 @@ const products = [
         name: "Moisturizing Baby Cream",
         category: "bath",
         price: 199,
-        icon: "🫙",
+        image: "images/products/baby-cream.jpg",
         badge: "20% OFF",
         rating: 5
     },
 
     {
         id: 5,
-        name: "Little Steps Baby Diapers",
+        name: "Soft Baby Diapers",
         category: "diapers",
         price: 399,
-        icon: "👶",
+        image: "images/products/diapers.jpg",
         badge: "POPULAR",
         rating: 5
     },
@@ -59,7 +59,7 @@ const products = [
         name: "Anti-Colic Feeding Bottle",
         category: "feeding",
         price: 299,
-        icon: "🍼",
+        image: "images/products/feeding-bottle.jpg",
         badge: "NEW",
         rating: 4
     },
@@ -69,7 +69,7 @@ const products = [
         name: "Baby Care Gift Set",
         category: "bath",
         price: 799,
-        icon: "🎁",
+        image: "images/products/gift-set.jpg",
         badge: "GIFT SET",
         rating: 5
     },
@@ -79,7 +79,7 @@ const products = [
         name: "Soft Cotton Baby Clothes",
         category: "clothing",
         price: 499,
-        icon: "👕",
+        image: "images/products/baby-clothes.jpg",
         badge: "20% OFF",
         rating: 5
     },
@@ -89,7 +89,7 @@ const products = [
         name: "Digital Baby Thermometer",
         category: "health",
         price: 349,
-        icon: "🌡️",
+        image: "images/products/thermometer.jpg",
         badge: "ESSENTIAL",
         rating: 5
     },
@@ -99,7 +99,7 @@ const products = [
         name: "Baby Grooming Kit",
         category: "health",
         price: 599,
-        icon: "🩺",
+        image: "images/products/grooming-kit.jpg",
         badge: "POPULAR",
         rating: 4
     },
@@ -109,7 +109,7 @@ const products = [
         name: "Baby Rattle Set",
         category: "toys",
         price: 299,
-        icon: "🪇",
+        image: "images/products/baby-rattle.jpg",
         badge: "NEW",
         rating: 5
     },
@@ -119,7 +119,7 @@ const products = [
         name: "Soft Teddy Bear",
         category: "toys",
         price: 399,
-        icon: "🧸",
+        image: "images/products/teddy-bear.jpg",
         badge: "BEST SELLER",
         rating: 5
     },
@@ -129,7 +129,7 @@ const products = [
         name: "Baby Training Cup",
         category: "feeding",
         price: 279,
-        icon: "🥤",
+        image: "images/products/training-cup.jpg",
         badge: "POPULAR",
         rating: 4
     },
@@ -139,7 +139,7 @@ const products = [
         name: "Newborn Bodysuit Set",
         category: "clothing",
         price: 599,
-        icon: "👚",
+        image: "images/products/bodysuit.jpg",
         badge: "NEW",
         rating: 5
     },
@@ -149,7 +149,7 @@ const products = [
         name: "Sensitive Skin Baby Soap",
         category: "bath",
         price: 129,
-        icon: "🧼",
+        image: "images/products/baby-soap.jpg",
         badge: "GENTLE",
         rating: 5
     },
@@ -159,7 +159,7 @@ const products = [
         name: "Premium Newborn Diapers",
         category: "diapers",
         price: 449,
-        icon: "🧷",
+        image: "images/products/premium-diapers.jpg",
         badge: "BEST SELLER",
         rating: 5
     }
@@ -167,9 +167,9 @@ const products = [
 ];
 
 
-/* ==============================
-   VARIABLES
-================================ */
+/* ========================================
+   ELEMENTS
+======================================== */
 
 const productGrid =
     document.getElementById("productGrid");
@@ -192,26 +192,44 @@ const cartCount =
 const toast =
     document.getElementById("toast");
 
-let cart = JSON.parse(localStorage.getItem("littleStepsCart")) || [];
-
-function updateCartCount() {
-
-    const totalItems = cart.reduce(
-        (total, item) => total + item.quantity,
-        0
-    );
-
-    cartCount.textContent = totalItems;
-}
 
 let activeCategory = "all";
 
 let searchTerm = "";
 
 
-/* ==============================
+/* ========================================
+   LOAD SAVED CART
+======================================== */
+
+let cart =
+    JSON.parse(
+        localStorage.getItem("littleStepsCart")
+    ) || [];
+
+
+/* ========================================
+   CATEGORY NAME
+======================================== */
+
+function getCategoryName(category) {
+
+    const categories = {
+        diapers: "Diapers & Wipes",
+        bath: "Bath & Skin Care",
+        feeding: "Feeding",
+        health: "Health & Safety",
+        toys: "Toys & Playtime",
+        clothing: "Clothing"
+    };
+
+    return categories[category] || category;
+}
+
+
+/* ========================================
    DISPLAY PRODUCTS
-================================ */
+======================================== */
 
 function displayProducts() {
 
@@ -222,6 +240,7 @@ function displayProducts() {
                 activeCategory === "all" ||
                 product.category === activeCategory;
 
+
             const searchMatch =
                 product.name
                     .toLowerCase()
@@ -229,8 +248,8 @@ function displayProducts() {
                         searchTerm.toLowerCase()
                     );
 
-            return categoryMatch &&
-                   searchMatch;
+
+            return categoryMatch && searchMatch;
 
         });
 
@@ -255,21 +274,24 @@ function displayProducts() {
 
         card.innerHTML = `
 
-            <span class="product-badge">
-                ${product.badge}
-            </span>
-
-            <button
-                class="wishlist"
-                aria-label="Add ${product.name} to wishlist"
-            >
-                ♡
-            </button>
-
-
             <div class="product-image">
 
-                ${product.icon}
+                <span class="product-badge">
+                    ${product.badge}
+                </span>
+
+                <button
+                    class="wishlist"
+                    aria-label="Add ${product.name} to wishlist"
+                >
+                    ♡
+                </button>
+
+                <img
+                    src="${product.image}"
+                    alt="${product.name}"
+                    loading="lazy"
+                >
 
             </div>
 
@@ -291,9 +313,9 @@ function displayProducts() {
 
                 <div class="product-bottom">
 
-                    <span class="price">
+                    <strong class="price">
                         ₱${product.price.toLocaleString()}
-                    </span>
+                    </strong>
 
                     <button
                         class="add-cart"
@@ -318,53 +340,16 @@ function displayProducts() {
         `${filteredProducts.length} products`;
 
 
-    if (filteredProducts.length === 0) {
-
-        noProducts.style.display =
-            "block";
-
-    } else {
-
-        noProducts.style.display =
-            "none";
-
-    }
-
+    noProducts.style.display =
+        filteredProducts.length === 0
+            ? "block"
+            : "none";
 }
 
 
-/* ==============================
-   CATEGORY NAME
-================================ */
-
-function getCategoryName(category) {
-
-    const names = {
-
-        diapers: "Diapers & Wipes",
-
-        bath: "Bath & Skin Care",
-
-        feeding: "Feeding",
-
-        health: "Health & Safety",
-
-        toys: "Toys & Playtime",
-
-        clothing: "Baby Clothing"
-
-    };
-
-
-    return names[category] ||
-           category;
-
-}
-
-
-/* ==============================
+/* ========================================
    FILTER PRODUCTS
-================================ */
+======================================== */
 
 function filterProducts(category) {
 
@@ -372,17 +357,18 @@ function filterProducts(category) {
 
 
     document
-        .querySelectorAll(".filter")
+        .querySelectorAll(".filter-button")
         .forEach(button => {
 
-            button.classList.toggle(
+            button.classList.remove("active");
 
-                "active",
+            if (
+                button.dataset.category === category
+            ) {
 
-                button.dataset.category ===
-                category
+                button.classList.add("active");
 
-            );
+            }
 
         });
 
@@ -395,16 +381,15 @@ function filterProducts(category) {
         .scrollIntoView({
             behavior: "smooth"
         });
-
 }
 
 
-/* FILTER BUTTONS */
+/* ========================================
+   FILTER BUTTONS
+======================================== */
 
 document
-    .querySelectorAll(
-        ".filter, .category-card, .view-all"
-    )
+    .querySelectorAll(".filter-button")
     .forEach(button => {
 
         button.addEventListener(
@@ -421,7 +406,31 @@ document
     });
 
 
-/* NAV CATEGORY LINKS */
+/* ========================================
+   CATEGORY CARDS
+======================================== */
+
+document
+    .querySelectorAll(".category-card")
+    .forEach(card => {
+
+        card.addEventListener(
+            "click",
+            () => {
+
+                filterProducts(
+                    card.dataset.category
+                );
+
+            }
+        );
+
+    });
+
+
+/* ========================================
+   NAVIGATION CATEGORY LINKS
+======================================== */
 
 document
     .querySelectorAll(
@@ -431,7 +440,9 @@ document
 
         link.addEventListener(
             "click",
-            () => {
+            event => {
+
+                event.preventDefault();
 
                 filterProducts(
                     link.dataset.category
@@ -443,9 +454,22 @@ document
     });
 
 
-/* ==============================
+/* ========================================
    SEARCH
-================================ */
+======================================== */
+
+searchInput.addEventListener(
+    "input",
+    event => {
+
+        searchTerm =
+            event.target.value.trim();
+
+        displayProducts();
+
+    }
+);
+
 
 searchForm.addEventListener(
     "submit",
@@ -456,9 +480,8 @@ searchForm.addEventListener(
         searchTerm =
             searchInput.value.trim();
 
-        activeCategory = "all";
-
         displayProducts();
+
 
         document
             .getElementById("products")
@@ -470,22 +493,9 @@ searchForm.addEventListener(
 );
 
 
-searchInput.addEventListener(
-    "input",
-    () => {
-
-        searchTerm =
-            searchInput.value.trim();
-
-        displayProducts();
-
-    }
-);
-
-
-/* ==============================
-   PRODUCT BUTTONS
-================================ */
+/* ========================================
+   ADD TO CART / WISHLIST
+======================================== */
 
 productGrid.addEventListener(
     "click",
@@ -493,73 +503,75 @@ productGrid.addEventListener(
 
         /* ADD TO CART */
 
-
-            if (
-                event.target
-                .classList
+        if (
+            event.target.classList
                 .contains("add-cart")
-                ) {
+        ) {
 
-                const productId =
-                Number(event.target.dataset.id);
+            const productId =
+                Number(
+                    event.target.dataset.id
+                );
 
-                const product =
+
+            const product =
                 products.find(
-                item => item.id === productId
+                    product =>
+                        product.id === productId
                 );
 
-                const existingProduct =
+
+            const existingProduct =
                 cart.find(
-                item => item.id === productId
+                    item =>
+                        item.id === productId
                 );
+
 
             if (existingProduct) {
 
                 existingProduct.quantity++;
 
-                } else {
+            } else {
 
                 cart.push({
-                ...product,
-                quantity: 1
+                    ...product,
+                    quantity: 1
                 });
 
-                }
-
-                localStorage.setItem(
-                "littleStepsCart",
-                JSON.stringify(cart)
-                );
-
-                updateCartCount();
-
-                showToast(
-                `${product.name} added to cart`
-                );
             }
+
+
+            saveCart();
+
+            updateCartCount();
+
+
+            showToast(
+                `${product.name} added to cart`
+            );
+
+        }
 
 
         /* WISHLIST */
 
         if (
-            event.target
-                .classList
+            event.target.classList
                 .contains("wishlist")
         ) {
 
-            event.target
-                .classList
-                .toggle("active");
+            event.target.classList.toggle(
+                "liked"
+            );
 
 
             if (
-                event.target
-                    .classList
-                    .contains("active")
+                event.target.classList
+                    .contains("liked")
             ) {
 
-                event.target.textContent =
-                    "♥";
+                event.target.textContent = "♥";
 
                 showToast(
                     "Added to wishlist"
@@ -567,8 +579,7 @@ productGrid.addEventListener(
 
             } else {
 
-                event.target.textContent =
-                    "♡";
+                event.target.textContent = "♡";
 
                 showToast(
                     "Removed from wishlist"
@@ -582,18 +593,49 @@ productGrid.addEventListener(
 );
 
 
-/* ==============================
+/* ========================================
+   SAVE CART
+======================================== */
+
+function saveCart() {
+
+    localStorage.setItem(
+        "littleStepsCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* ========================================
+   CART COUNTER
+======================================== */
+
+function updateCartCount() {
+
+    const totalItems =
+        cart.reduce(
+            (total, item) =>
+                total + item.quantity,
+            0
+        );
+
+
+    cartCount.textContent =
+        totalItems;
+
+}
+
+
+/* ========================================
    TOAST
-================================ */
+======================================== */
 
 function showToast(message) {
 
-    toast.textContent =
-        message;
+    toast.textContent = message;
 
-    toast.classList.add(
-        "show"
-    );
+    toast.classList.add("show");
 
 
     setTimeout(
@@ -604,48 +646,18 @@ function showToast(message) {
             );
 
         },
-
         2500
     );
 
 }
 
 
-/* ==============================
-   MOBILE MENU
-================================ */
-
-const menuButton =
-    document.getElementById(
-        "menuButton"
-    );
-
-const navLinks =
-    document.getElementById(
-        "navLinks"
-    );
-
-
-menuButton.addEventListener(
-    "click",
-    () => {
-
-        navLinks.classList.toggle(
-            "open"
-        );
-
-    }
-);
-
-
-/* ==============================
+/* ========================================
    NEWSLETTER
-================================ */
+======================================== */
 
 document
-    .getElementById(
-        "newsletterForm"
-    )
+    .getElementById("newsletterForm")
     .addEventListener(
         "submit",
         event => {
@@ -653,7 +665,7 @@ document
             event.preventDefault();
 
             showToast(
-                "Thanks for subscribing!"
+                "Thank you for subscribing!"
             );
 
             event.target.reset();
@@ -662,9 +674,28 @@ document
     );
 
 
-/* ==============================
-   INITIALIZE WEBSITE
-================================ */
+/* ========================================
+   MOBILE MENU
+======================================== */
+
+document
+    .getElementById("mobileMenu")
+    .addEventListener(
+        "click",
+        () => {
+
+            document
+                .getElementById("navLinks")
+                .classList.toggle("open");
+
+        }
+    );
+
+
+/* ========================================
+   INITIAL LOAD
+======================================== */
 
 displayProducts();
+
 updateCartCount();

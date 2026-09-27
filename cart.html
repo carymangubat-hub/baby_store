@@ -9,15 +9,11 @@
           content="width=device-width, initial-scale=1.0">
 
     <title>
-        Shopping Cart | Little Steps Baby Care
+        Shopping Cart | Little Steps
     </title>
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
-
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
@@ -31,49 +27,37 @@
 
 <body>
 
-
-<!-- ANNOUNCEMENT -->
-
-<div class="announcement">
+<div class="top-bar">
 
     <span>
         🚚 Free Shipping on orders ₱1,500+
     </span>
 
     <span>
-        ♥ Safe. Gentle. Trusted.
+        ♡ Safe. Gentle. Trusted.
     </span>
 
     <span>
-        🏷 10% Off Your First Order
+        10% Off Your First Order
     </span>
 
 </div>
 
 
-<!-- HEADER -->
+<header class="header">
 
-<header>
-
-    <div class="main-header">
+    <div class="header-main">
 
         <a href="index.html"
            class="logo">
 
-            <div class="logo-icon">
+            <div class="logo-symbol">
                 ♡
             </div>
 
             <div>
-
-                <h1>
-                    Little Steps
-                </h1>
-
-                <small>
-                    BABY CARE
-                </small>
-
+                <h1>Little Steps</h1>
+                <span>BABY CARE</span>
             </div>
 
         </a>
@@ -82,25 +66,23 @@
         <div class="header-actions">
 
             <a href="index.html"
-               class="header-button">
+               class="header-action">
 
-                <span>🏠</span>
-
-                Home
+                🏠
+                <span>Home</span>
 
             </a>
 
 
             <a href="cart.html"
-               class="header-button cart-button">
+               class="header-action cart-link">
 
-                <span>🛒</span>
+                🛒
+                <span>Cart</span>
 
-                Cart
-
-                <b id="cartCount">
+                <strong id="cartCount">
                     0
-                </b>
+                </strong>
 
             </a>
 
@@ -111,24 +93,18 @@
 </header>
 
 
-
-<!-- CART -->
-
 <main class="cart-page">
 
-    <div class="cart-title">
+    <div class="cart-page-title">
 
         <span class="eyebrow">
             YOUR ORDER
         </span>
 
-        <h1>
-            Shopping Cart
-        </h1>
+        <h1>Shopping Cart</h1>
 
         <p>
-            Review your Little Steps products
-            before checkout.
+            Review your products before checkout.
         </p>
 
     </div>
@@ -136,17 +112,11 @@
 
     <div class="cart-layout">
 
-
-        <!-- CART PRODUCTS -->
-
-        <section class="cart-products">
+        <section>
 
             <div id="cartItems">
-                <!-- JavaScript inserts products -->
             </div>
 
-
-            <!-- EMPTY CART -->
 
             <div
                 class="empty-cart"
@@ -157,18 +127,18 @@
                     🛒
                 </div>
 
-                <h2>
-                    Your cart is empty
-                </h2>
+                <h2>Your cart is empty</h2>
 
                 <p>
-                    Discover gentle essentials
+                    Discover something special
                     for your little one.
                 </p>
 
+                <br>
+
                 <a
                     href="index.html#products"
-                    class="primary-btn"
+                    class="primary-button"
                 >
                     Continue Shopping
                 </a>
@@ -178,24 +148,17 @@
         </section>
 
 
-
-        <!-- ORDER SUMMARY -->
-
         <aside
             class="order-summary"
             id="orderSummary"
         >
 
-            <h2>
-                Order Summary
-            </h2>
+            <h2>Order Summary</h2>
 
 
             <div class="summary-row">
 
-                <span>
-                    Subtotal
-                </span>
+                <span>Subtotal</span>
 
                 <strong id="subtotal">
                     ₱0
@@ -206,9 +169,7 @@
 
             <div class="summary-row">
 
-                <span>
-                    Shipping
-                </span>
+                <span>Shipping</span>
 
                 <strong id="shipping">
                     ₱0
@@ -223,9 +184,7 @@
 
             <div class="summary-row total">
 
-                <span>
-                    Total
-                </span>
+                <span>Total</span>
 
                 <strong id="total">
                     ₱0
@@ -238,9 +197,7 @@
                 class="checkout-button"
                 id="checkoutButton"
             >
-
                 Proceed to Checkout →
-
             </button>
 
 
@@ -248,40 +205,23 @@
                 href="index.html#products"
                 class="continue-shopping"
             >
-
                 ← Continue Shopping
-
             </a>
 
-
-            <div class="secure-checkout">
-
-                🔒 Secure Checkout
-
-                <small>
-                    Your information is protected.
-                </small>
-
-            </div>
-
         </aside>
-
 
     </div>
 
 </main>
 
 
-<!-- TOAST -->
-
 <div
     class="toast"
-    id="toast"
-></div>
+    id="toast">
+</div>
 
 
 <script src="cart.js"></script>
 
 </body>
-
 </html>

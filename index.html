@@ -1,86 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Little Steps | Baby Care</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
-          rel="stylesheet">
+    <meta name="description"
+          content="Shop baby care essentials including diapers, wipes, bath products, feeding essentials, clothing and toys.">
+
+    <title>Little Steps Baby Care</title>
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 </head>
 
+
 <body>
 
-<!-- =========================
-     TOP ANNOUNCEMENT BAR
-========================= -->
+<!-- TOP BAR -->
 
-<div class="announcement">
+<div class="top-bar">
     <span>🚚 Free Shipping on orders ₱1,500+</span>
-    <span>♥ Safe. Gentle. Trusted.</span>
-    <span>🏷 10% Off Your First Order</span>
+    <span>♡ Safe. Gentle. Trusted.</span>
+    <span>10% Off Your First Order</span>
 </div>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
-<header>
+<header class="header">
 
-    <div class="main-header">
+    <div class="header-main">
 
-        <a href="#" class="logo">
-            <div class="logo-icon">♡</div>
+        <a href="index.html" class="logo">
+
+            <div class="logo-symbol">
+                ♡
+            </div>
 
             <div>
                 <h1>Little Steps</h1>
-                <small>BABY CARE</small>
+                <span>BABY CARE</span>
             </div>
+
         </a>
 
-
-        <!-- SEARCH -->
 
         <form class="search-box" id="searchForm">
 
             <input
                 type="search"
                 id="searchInput"
-                placeholder="Search diapers, baby lotion, feeding, toys..."
-                aria-label="Search products"
+                placeholder="Search baby products..."
+                autocomplete="off"
             >
 
             <button type="submit">
-                Search
+                🔍
             </button>
 
         </form>
 
 
-        <!-- HEADER ACTIONS -->
-
         <div class="header-actions">
 
-            <button class="header-button">
-                <span>♙</span>
-                Account
+            <button class="header-action">
+                ♡
+                <span>Wishlist</span>
             </button>
 
-            <button class="header-button">
-                <span>♡</span>
-                Wishlist
-            </button>
+            <a href="cart.html"
+               class="header-action cart-link">
 
-            <a href="cart.html" class="header-button cart-button">
-                <span>🛒</span>
-                Cart
-                <b id="cartCount">0</b>
+                🛒
+
+                <span>Cart</span>
+
+                <strong id="cartCount">
+                    0
+                </strong>
+
             </a>
 
         </div>
@@ -90,23 +101,49 @@
 
     <!-- NAVIGATION -->
 
-    <nav>
+    <nav class="navigation">
 
-        <button class="mobile-menu" id="menuButton">
+        <button class="mobile-menu"
+                id="mobileMenu">
             ☰
         </button>
 
-        <div class="nav-links" id="navLinks">
+        <div class="nav-links"
+             id="navLinks">
 
-            <a href="#" class="active">Home</a>
-            <a href="#products" data-category="diapers">Diapers & Wipes</a>
-            <a href="#products" data-category="bath">Bath & Skin Care</a>
-            <a href="#products" data-category="feeding">Feeding</a>
-            <a href="#products" data-category="health">Health & Safety</a>
-            <a href="#products" data-category="toys">Toys & Playtime</a>
-            <a href="#products" data-category="clothing">Clothing</a>
-            <a href="#products">New Arrivals</a>
-            <a href="#products">Deals</a>
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="#products"
+               data-category="diapers">
+                Diapers & Wipes
+            </a>
+
+            <a href="#products"
+               data-category="bath">
+                Bath & Skin Care
+            </a>
+
+            <a href="#products"
+               data-category="feeding">
+                Feeding
+            </a>
+
+            <a href="#products"
+               data-category="health">
+                Health & Safety
+            </a>
+
+            <a href="#products"
+               data-category="toys">
+                Toys
+            </a>
+
+            <a href="#products"
+               data-category="clothing">
+                Clothing
+            </a>
 
         </div>
 
@@ -115,99 +152,62 @@
 </header>
 
 
-<!-- =========================
-     HERO SECTION
-========================= -->
-
-<main>
+<!-- HERO -->
 
 <section class="hero">
 
     <div class="hero-content">
 
-        <span class="hero-label">
-            LITTLE STEPS BABY CARE
+        <span class="eyebrow">
+            GENTLE CARE FOR LITTLE ONES
         </span>
 
         <h2>
-            Soft Care for Happy
-            <span>Little Moments</span>
+            Soft Care for
+            <span>Happy Little Moments</span>
         </h2>
 
-        <h3>
-            Safe. Gentle. Trusted.
-        </h3>
-
         <p>
-            Everything your baby needs for a healthy,
-            happy start. Discover gentle baby essentials
-            made with love and care.
+            Discover everyday essentials carefully
+            selected for babies and growing families.
         </p>
+
 
         <div class="hero-buttons">
 
-            <a href="#products" class="primary-btn">
-                SHOP NOW →
+            <a href="#products"
+               class="primary-button">
+                Shop Now
             </a>
 
-            <a href="#categories" class="secondary-btn">
-                View Categories
+            <a href="#categories"
+               class="secondary-button">
+                Browse Categories
             </a>
+
+        </div>
+
+
+        <div class="hero-features">
+
+            <span>✓ Gentle Products</span>
+            <span>✓ Quality Essentials</span>
+            <span>✓ Parent Friendly</span>
 
         </div>
 
     </div>
 
 
-    <div class="hero-visual">
+    <div class="hero-image">
 
-        <!-- Replace with your generated baby/product hero image -->
+        <img
+            src="images/products/baby-lotion.jpg"
+            alt="Baby care products"
+        >
 
-        <div class="baby-placeholder">
-
-            <div class="placeholder-icon">🧸</div>
-
-            <p>
-                Add your baby/product hero image here
-            </p>
-
-        </div>
-
-    </div>
-
-
-    <div class="hero-benefits">
-
-        <div>
-            <span>🍃</span>
-            <p>
-                <strong>Gentle</strong>
-                Sensitive Skin
-            </p>
-        </div>
-
-        <div>
-            <span>🛡</span>
-            <p>
-                <strong>Safe</strong>
-                Baby Care
-            </p>
-        </div>
-
-        <div>
-            <span>🌿</span>
-            <p>
-                <strong>Natural</strong>
-                Ingredients
-            </p>
-        </div>
-
-        <div>
-            <span>♥</span>
-            <p>
-                <strong>Trusted</strong>
-                By Parents
-            </p>
+        <div class="hero-floating-card">
+            ♡ Gentle everyday care
         </div>
 
     </div>
@@ -215,116 +215,104 @@
 </section>
 
 
-<!-- =========================
-     STORE BENEFITS
-========================= -->
+<!-- BENEFITS -->
 
-<section class="store-benefits">
+<section class="benefits">
 
-    <div>
-        <span>🚚</span>
-        <p>
-            <strong>Fast Shipping</strong>
-            Reliable delivery
-        </p>
-    </div>
+    <article>
+        <div>🚚</div>
+        <h3>Fast Delivery</h3>
+        <p>Reliable delivery to your doorstep.</p>
+    </article>
 
-    <div>
-        <span>🛡</span>
-        <p>
-            <strong>Secure Checkout</strong>
-            Protected payments
-        </p>
-    </div>
+    <article>
+        <div>🔒</div>
+        <h3>Secure Shopping</h3>
+        <p>Shop confidently and securely.</p>
+    </article>
 
-    <div>
-        <span>🍃</span>
-        <p>
-            <strong>Quality Products</strong>
-            Baby-friendly care
-        </p>
-    </div>
+    <article>
+        <div>♡</div>
+        <h3>Baby Essentials</h3>
+        <p>Products selected for little ones.</p>
+    </article>
 
-    <div>
-        <span>🎧</span>
-        <p>
-            <strong>Customer Support</strong>
-            We're here to help
-        </p>
-    </div>
-
-    <div>
-        <span>↻</span>
-        <p>
-            <strong>Easy Returns</strong>
-            Hassle-free service
-        </p>
-    </div>
+    <article>
+        <div>↩</div>
+        <h3>Easy Returns</h3>
+        <p>Simple and convenient returns.</p>
+    </article>
 
 </section>
 
 
-<!-- =========================
-     CATEGORIES
-========================= -->
+<!-- CATEGORIES -->
 
-<section class="categories section-container" id="categories">
+<section class="section" id="categories">
 
     <div class="section-heading">
 
-        <div>
-            <span class="eyebrow">EXPLORE</span>
-            <h2>Shop by Category</h2>
-        </div>
+        <span class="eyebrow">
+            EVERYTHING YOUR BABY NEEDS
+        </span>
 
-        <button class="view-all" data-category="all">
-            View All Categories →
-        </button>
+        <h2>Shop by Category</h2>
+
+        <p>
+            Find the right essentials for every
+            little moment.
+        </p>
 
     </div>
 
 
     <div class="category-grid">
 
-        <button class="category-card" data-category="diapers">
-            <div class="category-image">🧷</div>
+        <button class="category-card"
+                data-category="diapers">
+            <span>👶</span>
             <h3>Diapers & Wipes</h3>
-            <p>Soft everyday essentials</p>
+            <p>Clean, comfortable and convenient.</p>
         </button>
 
 
-        <button class="category-card" data-category="bath">
-            <div class="category-image">🧴</div>
+        <button class="category-card"
+                data-category="bath">
+            <span>🛁</span>
             <h3>Bath & Skin Care</h3>
-            <p>Gentle skin protection</p>
+            <p>Gentle everyday skin care.</p>
         </button>
 
 
-        <button class="category-card" data-category="feeding">
-            <div class="category-image">🍼</div>
+        <button class="category-card"
+                data-category="feeding">
+            <span>🍼</span>
             <h3>Feeding</h3>
-            <p>Bottles & accessories</p>
+            <p>Bottles, cups and feeding essentials.</p>
         </button>
 
 
-        <button class="category-card" data-category="health">
-            <div class="category-image">🌡️</div>
+        <button class="category-card"
+                data-category="health">
+            <span>♡</span>
             <h3>Health & Safety</h3>
-            <p>Everyday baby safety</p>
+            <p>Helpful baby care essentials.</p>
         </button>
 
 
-        <button class="category-card" data-category="toys">
-            <div class="category-image">🧸</div>
+        <button class="category-card"
+                data-category="toys">
+            <span>🧸</span>
             <h3>Toys & Playtime</h3>
-            <p>Learn, laugh and play</p>
+            <p>Fun for growing little ones.</p>
         </button>
 
 
-        <button class="category-card" data-category="clothing">
-            <div class="category-image">👕</div>
+        <button class="category-card"
+                data-category="clothing">
+            <span>👕</span>
             <h3>Baby Clothing</h3>
-            <p>Comfortable essentials</p>
+            <p>Soft and comfortable outfits.</p>
         </button>
 
     </div>
@@ -332,74 +320,99 @@
 </section>
 
 
-<!-- =========================
-     PRODUCTS
-========================= -->
+<!-- PRODUCTS -->
 
-<section class="products section-container" id="products">
+<section class="section products-section"
+         id="products">
 
     <div class="section-heading">
 
-        <div>
-            <span class="eyebrow">OUR FAVORITES</span>
-            <h2>Featured Products</h2>
+        <span class="eyebrow">
+            OUR FAVORITES
+        </span>
+
+        <h2>Baby Essentials</h2>
+
+        <p>
+            Browse our collection of everyday
+            baby products.
+        </p>
+
+    </div>
+
+
+    <!-- FILTER -->
+
+    <div class="product-toolbar">
+
+        <div class="filters">
+
+            <button
+                class="filter-button active"
+                data-category="all">
+                All
+            </button>
+
+            <button
+                class="filter-button"
+                data-category="diapers">
+                Diapers
+            </button>
+
+            <button
+                class="filter-button"
+                data-category="bath">
+                Bath
+            </button>
+
+            <button
+                class="filter-button"
+                data-category="feeding">
+                Feeding
+            </button>
+
+            <button
+                class="filter-button"
+                data-category="health">
+                Health
+            </button>
+
+            <button
+                class="filter-button"
+                data-category="toys">
+                Toys
+            </button>
+
+            <button
+                class="filter-button"
+                data-category="clothing">
+                Clothing
+            </button>
+
         </div>
 
-        <p id="productCount"></p>
+
+        <span id="productCount">
+            0 products
+        </span>
 
     </div>
 
 
-    <!-- FILTERS -->
+    <!-- PRODUCT GRID -->
 
-    <div class="product-filters">
-
-        <button class="filter active" data-category="all">
-            All
-        </button>
-
-        <button class="filter" data-category="diapers">
-            Diapers
-        </button>
-
-        <button class="filter" data-category="bath">
-            Bath & Skin
-        </button>
-
-        <button class="filter" data-category="feeding">
-            Feeding
-        </button>
-
-        <button class="filter" data-category="health">
-            Health
-        </button>
-
-        <button class="filter" data-category="toys">
-            Toys
-        </button>
-
-        <button class="filter" data-category="clothing">
-            Clothing
-        </button>
-
+    <div class="product-grid"
+         id="productGrid">
     </div>
 
 
-    <div class="product-grid" id="productGrid">
-
-        <!-- JavaScript inserts products here -->
-
-    </div>
-
-
-    <div class="no-products" id="noProducts">
-
-        <div>🔎</div>
+    <div class="no-products"
+         id="noProducts">
 
         <h3>No products found</h3>
 
         <p>
-            Try searching for something else.
+            Try another search or category.
         </p>
 
     </div>
@@ -407,23 +420,23 @@
 </section>
 
 
-<!-- =========================
-     NEWSLETTER
-========================= -->
+<!-- NEWSLETTER -->
 
 <section class="newsletter">
 
     <div>
 
-        <span>♥ LITTLE STEPS FAMILY</span>
+        <span class="eyebrow">
+            LITTLE STEPS FAMILY
+        </span>
 
         <h2>
-            Gentle care delivered to your inbox.
+            Get special offers & updates
         </h2>
 
         <p>
-            Get product updates, baby-care tips
-            and special offers.
+            Join our mailing list for product
+            updates and promotions.
         </p>
 
     </div>
@@ -433,7 +446,7 @@
 
         <input
             type="email"
-            placeholder="Enter your email"
+            placeholder="Enter your email address"
             required
         >
 
@@ -445,12 +458,8 @@
 
 </section>
 
-</main>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
+<!-- FOOTER -->
 
 <footer>
 
@@ -458,67 +467,66 @@
 
         <div>
 
-            <h2>Little Steps</h2>
+            <a href="index.html"
+               class="logo footer-logo">
+
+                <div class="logo-symbol">
+                    ♡
+                </div>
+
+                <div>
+                    <h2>Little Steps</h2>
+                    <span>BABY CARE</span>
+                </div>
+
+            </a>
 
             <p>
-                Gentle baby essentials designed
-                for happy little moments.
+                Gentle essentials for happy
+                babies and happy families.
             </p>
 
         </div>
 
 
         <div>
-
             <h3>Shop</h3>
 
-            <a href="#products">Baby Care</a>
-            <a href="#products">Diapers</a>
-            <a href="#products">Feeding</a>
-            <a href="#products">Clothing</a>
-
+            <a href="#products">All Products</a>
+            <a href="#categories">Categories</a>
+            <a href="#products">New Arrivals</a>
         </div>
 
 
         <div>
-
-            <h3>Help</h3>
+            <h3>Customer Care</h3>
 
             <a href="#">Contact Us</a>
             <a href="#">Shipping</a>
             <a href="#">Returns</a>
-            <a href="#">FAQ</a>
-
         </div>
 
 
         <div>
+            <h3>Information</h3>
 
-            <h3>Follow Us</h3>
-
-            <a href="#">Facebook</a>
-            <a href="#">Instagram</a>
-            <a href="#">TikTok</a>
-
+            <a href="#">About Us</a>
+            <a href="#">Privacy</a>
+            <a href="#">Terms</a>
         </div>
 
     </div>
 
 
     <div class="copyright">
-
         © 2026 Little Steps Baby Care.
         All rights reserved.
-
     </div>
 
 </footer>
 
 
-<!-- TOAST MESSAGE -->
-
 <div class="toast" id="toast"></div>
-
 
 <script src="script.js"></script>
 
