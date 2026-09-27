@@ -192,7 +192,17 @@ const cartCount =
 const toast =
     document.getElementById("toast");
 
-let cart = 0;
+let cart = JSON.parse(localStorage.getItem("littleStepsCart")) || [];
+
+function updateCartCount() {
+
+    const totalItems = cart.reduce(
+        (total, item) => total + item.quantity,
+        0
+    );
+
+    cartCount.textContent = totalItems;
+}
 
 let activeCategory = "all";
 
@@ -483,35 +493,50 @@ productGrid.addEventListener(
 
         /* ADD TO CART */
 
-        if (
-            event.target
+
+            if (
+                event.target
                 .classList
                 .contains("add-cart")
-        ) {
+                ) {
 
-            cart++;
+                const productId =
+                Number(event.target.dataset.id);
 
-            cartCount.textContent =
-                cart;
-
-            const productId =
-                Number(
-                    event.target.dataset.id
-                );
-
-
-            const product =
+                const product =
                 products.find(
-                    item =>
-                        item.id === productId
+                item => item.id === productId
                 );
 
+                const existingProduct =
+                cart.find(
+                item => item.id === productId
+                );
 
-            showToast(
+            if (existingProduct) {
+
+                existingProduct.quantity++;
+
+                } else {
+
+                cart.push({
+                ...product,
+                quantity: 1
+                });
+
+                }
+
+                localStorage.setItem(
+                "littleStepsCart",
+                JSON.stringify(cart)
+                );
+
+                updateCartCount();
+
+                showToast(
                 `${product.name} added to cart`
-            );
-
-        }
+                );
+            }
 
 
         /* WISHLIST */
@@ -642,3 +667,4 @@ document
 ================================ */
 
 displayProducts();
+updateCartCount();
