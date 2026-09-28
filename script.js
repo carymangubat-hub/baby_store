@@ -1,176 +1,3 @@
-/* ========================================
-   LITTLE STEPS PRODUCT DATABASE
-======================================== */
-
-const products = [
-
-    {
-        id: 1,
-        name: "Extra Soft Baby Wipes",
-        category: "diapers",
-        price: 149,
-        image: "images/products/baby-wipes.jpg",
-        badge: "BEST SELLER",
-        rating: 5
-    },
-
-    {
-        id: 2,
-        name: "Gentle Baby Lotion",
-        category: "bath",
-        price: 229,
-        image: "images/products/baby-lotion.jpg",
-        badge: "NEW",
-        rating: 5
-    },
-
-    {
-        id: 3,
-        name: "Gentle Baby Wash",
-        category: "bath",
-        price: 249,
-        image: "images/products/baby-wash.jpg",
-        badge: "NEW",
-        rating: 5
-    },
-
-    {
-        id: 4,
-        name: "Moisturizing Baby Cream",
-        category: "bath",
-        price: 199,
-        image: "images/products/baby-cream.jpg",
-        badge: "20% OFF",
-        rating: 5
-    },
-
-    {
-        id: 5,
-        name: "Soft Baby Diapers",
-        category: "diapers",
-        price: 399,
-        image: "images/products/diapers.jpg",
-        badge: "POPULAR",
-        rating: 5
-    },
-
-    {
-        id: 6,
-        name: "Anti-Colic Feeding Bottle",
-        category: "feeding",
-        price: 299,
-        image: "images/products/feeding-bottle.jpg",
-        badge: "NEW",
-        rating: 4
-    },
-
-    {
-        id: 7,
-        name: "Baby Care Gift Set",
-        category: "bath",
-        price: 799,
-        image: "images/products/gift-set.jpg",
-        badge: "GIFT SET",
-        rating: 5
-    },
-
-    {
-        id: 8,
-        name: "Soft Cotton Baby Clothes",
-        category: "clothing",
-        price: 499,
-        image: "images/products/baby-clothes.jpg",
-        badge: "20% OFF",
-        rating: 5
-    },
-
-    {
-        id: 9,
-        name: "Digital Baby Thermometer",
-        category: "health",
-        price: 349,
-        image: "images/products/thermometer.jpg",
-        badge: "ESSENTIAL",
-        rating: 5
-    },
-
-    {
-        id: 10,
-        name: "Baby Grooming Kit",
-        category: "health",
-        price: 599,
-        image: "images/products/grooming-kit.jpg",
-        badge: "POPULAR",
-        rating: 4
-    },
-
-    {
-        id: 11,
-        name: "Baby Rattle Set",
-        category: "toys",
-        price: 299,
-        image: "images/products/baby-rattle.jpg",
-        badge: "NEW",
-        rating: 5
-    },
-
-    {
-        id: 12,
-        name: "Soft Teddy Bear",
-        category: "toys",
-        price: 399,
-        image: "images/products/teddy-bear.jpg",
-        badge: "BEST SELLER",
-        rating: 5
-    },
-
-    {
-        id: 13,
-        name: "Baby Training Cup",
-        category: "feeding",
-        price: 279,
-        image: "images/products/training-cup.jpg",
-        badge: "POPULAR",
-        rating: 4
-    },
-
-    {
-        id: 14,
-        name: "Newborn Bodysuit Set",
-        category: "clothing",
-        price: 599,
-        image: "images/products/bodysuit.jpg",
-        badge: "NEW",
-        rating: 5
-    },
-
-    {
-        id: 15,
-        name: "Sensitive Skin Baby Soap",
-        category: "bath",
-        price: 129,
-        image: "images/products/baby-soap.jpg",
-        badge: "GENTLE",
-        rating: 5
-    },
-
-    {
-        id: 16,
-        name: "Premium Newborn Diapers",
-        category: "diapers",
-        price: 449,
-        image: "images/products/premium-diapers.jpg",
-        badge: "BEST SELLER",
-        rating: 5
-    }
-
-];
-
-
-/* ========================================
-   ELEMENTS
-======================================== */
-
 const productGrid =
     document.getElementById("productGrid");
 
@@ -194,13 +21,8 @@ const toast =
 
 
 let activeCategory = "all";
-
 let searchTerm = "";
 
-
-/* ========================================
-   LOAD SAVED CART
-======================================== */
 
 let cart =
     JSON.parse(
@@ -208,28 +30,9 @@ let cart =
     ) || [];
 
 
-/* ========================================
-   CATEGORY NAME
-======================================== */
-
-function getCategoryName(category) {
-
-    const categories = {
-        diapers: "Diapers & Wipes",
-        bath: "Bath & Skin Care",
-        feeding: "Feeding",
-        health: "Health & Safety",
-        toys: "Toys & Playtime",
-        clothing: "Clothing"
-    };
-
-    return categories[category] || category;
-}
-
-
-/* ========================================
+/* =========================
    DISPLAY PRODUCTS
-======================================== */
+========================= */
 
 function displayProducts() {
 
@@ -240,14 +43,12 @@ function displayProducts() {
                 activeCategory === "all" ||
                 product.category === activeCategory;
 
-
             const searchMatch =
                 product.name
                     .toLowerCase()
                     .includes(
                         searchTerm.toLowerCase()
                     );
-
 
             return categoryMatch && searchMatch;
 
@@ -257,41 +58,55 @@ function displayProducts() {
     productGrid.innerHTML = "";
 
 
+    productCount.textContent =
+        `${filteredProducts.length} products`;
+
+
+    noProducts.style.display =
+        filteredProducts.length
+            ? "none"
+            : "block";
+
+
     filteredProducts.forEach(product => {
-
-        const stars =
-            "★".repeat(product.rating) +
-            "☆".repeat(5 - product.rating);
-
 
         const card =
             document.createElement("article");
 
-
-        card.className =
-            "product-card";
+        card.className = "product-card";
 
 
         card.innerHTML = `
 
-            <div class="product-image">
+            <div class="product-image-wrapper">
+
+                <a
+                    href="product.html?id=${product.id}"
+                    class="product-image-link"
+                >
+
+                    <img
+                        class="product-image"
+                        src="${product.image}"
+                        alt="${product.name}"
+                        loading="lazy"
+                    >
+
+                </a>
+
 
                 <span class="product-badge">
                     ${product.badge}
                 </span>
 
+
                 <button
                     class="wishlist"
+                    type="button"
                     aria-label="Add ${product.name} to wishlist"
                 >
                     ♡
                 </button>
-
-                <img
-                    src="${product.image}"
-                    alt="${product.name}"
-                    loading="lazy"
-                >
 
             </div>
 
@@ -302,23 +117,46 @@ function displayProducts() {
                     ${getCategoryName(product.category)}
                 </span>
 
-                <h3>
-                    ${product.name}
-                </h3>
 
-                <div class="rating">
-                    ${stars}
-                </div>
+                <a
+                    href="product.html?id=${product.id}"
+                    class="product-title-link"
+                >
+
+                    <h3>
+                        ${product.name}
+                    </h3>
+
+                </a>
+
+
+                <a
+                    href="product.html?id=${product.id}#reviews"
+                    class="product-rating"
+                >
+
+                    <span class="stars">
+                        ${createStars(product.rating)}
+                    </span>
+
+                    <span>
+                        ${product.rating}
+                        (${product.reviewCount})
+                    </span>
+
+                </a>
 
 
                 <div class="product-bottom">
 
-                    <strong class="price">
-                        ₱${product.price.toLocaleString()}
+                    <strong class="product-price">
+                        ${formatPrice(product.price)}
                     </strong>
+
 
                     <button
                         class="add-cart"
+                        type="button"
                         data-id="${product.id}"
                     >
                         Add to Cart
@@ -335,21 +173,12 @@ function displayProducts() {
 
     });
 
-
-    productCount.textContent =
-        `${filteredProducts.length} products`;
-
-
-    noProducts.style.display =
-        filteredProducts.length === 0
-            ? "block"
-            : "none";
 }
 
 
-/* ========================================
+/* =========================
    FILTER PRODUCTS
-======================================== */
+========================= */
 
 function filterProducts(category) {
 
@@ -360,15 +189,10 @@ function filterProducts(category) {
         .querySelectorAll(".filter-button")
         .forEach(button => {
 
-            button.classList.remove("active");
-
-            if (
+            button.classList.toggle(
+                "active",
                 button.dataset.category === category
-            ) {
-
-                button.classList.add("active");
-
-            }
+            );
 
         });
 
@@ -381,12 +205,11 @@ function filterProducts(category) {
         .scrollIntoView({
             behavior: "smooth"
         });
+
 }
 
 
-/* ========================================
-   FILTER BUTTONS
-======================================== */
+/* FILTER BUTTONS */
 
 document
     .querySelectorAll(".filter-button")
@@ -406,9 +229,7 @@ document
     });
 
 
-/* ========================================
-   CATEGORY CARDS
-======================================== */
+/* CATEGORY CARDS */
 
 document
     .querySelectorAll(".category-card")
@@ -428,9 +249,7 @@ document
     });
 
 
-/* ========================================
-   NAVIGATION CATEGORY LINKS
-======================================== */
+/* NAVIGATION CATEGORY LINKS */
 
 document
     .querySelectorAll(
@@ -454,16 +273,16 @@ document
     });
 
 
-/* ========================================
+/* =========================
    SEARCH
-======================================== */
+========================= */
 
 searchInput.addEventListener(
     "input",
-    event => {
+    () => {
 
         searchTerm =
-            event.target.value.trim();
+            searchInput.value.trim();
 
         displayProducts();
 
@@ -482,7 +301,6 @@ searchForm.addEventListener(
 
         displayProducts();
 
-
         document
             .getElementById("products")
             .scrollIntoView({
@@ -493,99 +311,42 @@ searchForm.addEventListener(
 );
 
 
-/* ========================================
-   ADD TO CART / WISHLIST
-======================================== */
+/* =========================
+   PRODUCT BUTTONS
+========================= */
 
 productGrid.addEventListener(
     "click",
     event => {
 
-        /* ADD TO CART */
+        const cartButton =
+            event.target.closest(".add-cart");
 
-        if (
-            event.target.classList
-                .contains("add-cart")
-        ) {
-
-            const productId =
-                Number(
-                    event.target.dataset.id
-                );
+        const wishlistButton =
+            event.target.closest(".wishlist");
 
 
-            const product =
-                products.find(
-                    product =>
-                        product.id === productId
-                );
+        if (cartButton) {
 
+            const id =
+                Number(cartButton.dataset.id);
 
-            const existingProduct =
-                cart.find(
-                    item =>
-                        item.id === productId
-                );
-
-
-            if (existingProduct) {
-
-                existingProduct.quantity++;
-
-            } else {
-
-                cart.push({
-                    ...product,
-                    quantity: 1
-                });
-
-            }
-
-
-            saveCart();
-
-            updateCartCount();
-
-
-            showToast(
-                `${product.name} added to cart`
-            );
+            addToCart(id);
 
         }
 
 
-        /* WISHLIST */
+        if (wishlistButton) {
 
-        if (
-            event.target.classList
-                .contains("wishlist")
-        ) {
-
-            event.target.classList.toggle(
+            wishlistButton.classList.toggle(
                 "liked"
             );
 
-
-            if (
-                event.target.classList
+            wishlistButton.textContent =
+                wishlistButton.classList
                     .contains("liked")
-            ) {
-
-                event.target.textContent = "♥";
-
-                showToast(
-                    "Added to wishlist"
-                );
-
-            } else {
-
-                event.target.textContent = "♡";
-
-                showToast(
-                    "Removed from wishlist"
-                );
-
-            }
+                    ? "♥"
+                    : "♡";
 
         }
 
@@ -593,9 +354,48 @@ productGrid.addEventListener(
 );
 
 
-/* ========================================
-   SAVE CART
-======================================== */
+/* =========================
+   CART
+========================= */
+
+function addToCart(id) {
+
+    const product =
+        getProductById(id);
+
+    if (!product) {
+        return;
+    }
+
+
+    const existing =
+        cart.find(item => item.id === id);
+
+
+    if (existing) {
+
+        existing.quantity += 1;
+
+    } else {
+
+        cart.push({
+            id: product.id,
+            quantity: 1
+        });
+
+    }
+
+
+    saveCart();
+
+    updateCartCount();
+
+    showToast(
+        `${product.name} added to cart`
+    );
+
+}
+
 
 function saveCart() {
 
@@ -607,29 +407,24 @@ function saveCart() {
 }
 
 
-/* ========================================
-   CART COUNTER
-======================================== */
-
 function updateCartCount() {
 
-    const totalItems =
+    const total =
         cart.reduce(
-            (total, item) =>
-                total + item.quantity,
+            (sum, item) =>
+                sum + item.quantity,
             0
         );
 
 
-    cartCount.textContent =
-        totalItems;
+    cartCount.textContent = total;
 
 }
 
 
-/* ========================================
+/* =========================
    TOAST
-======================================== */
+========================= */
 
 function showToast(message) {
 
@@ -640,11 +435,7 @@ function showToast(message) {
 
     setTimeout(
         () => {
-
-            toast.classList.remove(
-                "show"
-            );
-
+            toast.classList.remove("show");
         },
         2500
     );
@@ -652,50 +443,52 @@ function showToast(message) {
 }
 
 
-/* ========================================
+/* =========================
    NEWSLETTER
-======================================== */
+========================= */
 
-document
-    .getElementById("newsletterForm")
-    .addEventListener(
-        "submit",
-        event => {
-
-            event.preventDefault();
-
-            showToast(
-                "Thank you for subscribing!"
-            );
-
-            event.target.reset();
-
-        }
+const newsletter =
+    document.getElementById(
+        "newsletterForm"
     );
 
 
-/* ========================================
+newsletter.addEventListener(
+    "submit",
+    event => {
+
+        event.preventDefault();
+
+        showToast(
+            "Thanks for joining Little Steps!"
+        );
+
+        newsletter.reset();
+
+    }
+);
+
+
+/* =========================
    MOBILE MENU
-======================================== */
+========================= */
 
-document
-    .getElementById("mobileMenu")
-    .addEventListener(
-        "click",
-        () => {
+const mobileMenu =
+    document.getElementById("mobileMenu");
 
-            document
-                .getElementById("navLinks")
-                .classList.toggle("open");
-
-        }
-    );
+const navLinks =
+    document.getElementById("navLinks");
 
 
-/* ========================================
-   INITIAL LOAD
-======================================== */
+mobileMenu.addEventListener(
+    "click",
+    () => {
+
+        navLinks.classList.toggle("open");
+
+    }
+);
+
 
 displayProducts();
-
 updateCartCount();

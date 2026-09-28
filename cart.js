@@ -22,6 +22,9 @@ const shippingElement =
 const totalElement =
     document.getElementById("total");
 
+const shippingMessage =
+    document.getElementById("shippingMessage");
+
 const cartCount =
     document.getElementById("cartCount");
 
@@ -29,35 +32,13 @@ const toast =
     document.getElementById("toast");
 
 
-function saveCart() {
-
-    localStorage.setItem(
-        "littleStepsCart",
-        JSON.stringify(cart)
-    );
-
-}
-
-
-function updateCartCount() {
-
-    const count =
-        cart.reduce(
-            (total, item) =>
-                total + item.quantity,
-            0
-        );
-
-    cartCount.textContent = count;
-
-}
-
+/* =========================
+   DISPLAY CART
+========================= */
 
 function displayCart() {
 
     cartItems.innerHTML = "";
-
-    updateCartCount();
 
 
     if (cart.length === 0) {
@@ -68,7 +49,10 @@ function displayCart() {
         orderSummary.style.display =
             "none";
 
+        updateCartCount();
+
         return;
+
     }
 
 
@@ -79,45 +63,70 @@ function displayCart() {
         "block";
 
 
-    cart.forEach(product => {
+    cart.forEach(item => {
 
-        const item =
-            document.createElement("article");
+        const product =
+            getProductById(item.id);
 
 
-        item.className =
+        if (!product) {
+            return;
+        }
+
+
+        const element =
+            document.createElement(
+                "article"
+            );
+
+
+        element.className =
             "cart-item";
 
 
-        item.innerHTML = `
+        element.innerHTML = `
 
-            <div class="cart-item-image">
+            <a
+                href="product.html?id=${product.id}"
+                class="cart-image"
+            >
 
                 <img
                     src="${product.image}"
                     alt="${product.name}"
                 >
 
-            </div>
+            </a>
 
 
-            <div class="cart-item-details">
+            <div class="cart-item-info">
 
-                <span class="cart-category">
-                    ${product.category}
+                <span class="product-category">
+                    ${getCategoryName(product.category)}
                 </span>
 
-                <h3>
-                    ${product.name}
-                </h3>
+
+                <a
+                    href="product.html?id=${product.id}"
+                    class="product-title-link"
+                >
+
+                    <h3>
+                        ${product.name}
+                    </h3>
+
+                </a>
+
 
                 <strong>
-                    ₱${product.price.toLocaleString()}
+                    ${formatPrice(product.price)}
                 </strong>
+
 
                 <button
                     class="remove-item"
                     data-id="${product.id}"
+                    type="button"
                 >
                     Remove
                 </button>
@@ -125,22 +134,26 @@ function displayCart() {
             </div>
 
 
-            <div class="quantity-control">
+            <div class="cart-quantity">
 
                 <button
                     class="decrease"
                     data-id="${product.id}"
+                    type="button"
                 >
                     −
                 </button>
 
+
                 <span>
-                    ${product.quantity}
+                    ${item.quantity}
                 </span>
+
 
                 <button
                     class="increase"
                     data-id="${product.id}"
+                    type="button"
                 >
                     +
                 </button>
@@ -148,37 +161,58 @@ function displayCart() {
             </div>
 
 
-            <div class="item-total">
+            <strong class="cart-item-total">
 
-                ₱${(
+                ${formatPrice(
                     product.price *
-                    product.quantity
-                ).toLocaleString()}
+                    item.quantity
+                )}
 
-            </div>
+            </strong>
 
         `;
 
 
-        cartItems.appendChild(item);
+        cartItems.appendChild(
+            element
+        );
 
     });
 
 
     calculateTotals();
+
+    updateCartCount();
+
 }
 
+
+/* =========================
+   TOTALS
+========================= */
 
 function calculateTotals() {
 
     const subtotal =
         cart.reduce(
-            (total, product) =>
+            (total, item) => {
 
-                total +
-                product.price *
-                product.quantity,
+                const product =
+                    getProductById(
+                        item.id
+                    );
 
+                if (!product) {
+                    return total;
+                }
+
+                return (
+                    total +
+                    product.price *
+                    item.quantity
+                );
+
+            },
             0
         );
 
@@ -194,72 +228,122 @@ function calculateTotals() {
 
 
     subtotalElement.textContent =
-        `₱${subtotal.toLocaleString()}`;
+        formatPrice(subtotal);
 
 
     shippingElement.textContent =
         shipping === 0
             ? "FREE"
-            : `₱${shipping.toLocaleString()}`;
+            : formatPrice(shipping);
 
 
     totalElement.textContent =
-        `₱${total.toLocaleString()}`;
+        formatPrice(total);
+
+
+    if (
+        subtotal > 0 &&
+        subtotal < 1500
+    ) {
+
+        shippingMessage.textContent =
+            `Add ${formatPrice(
+                1500 - subtotal
+            )} more for free shipping.`;
+
+    } else {
+
+        shippingMessage.textContent =
+            subtotal >= 1500
+                ? "You qualify for free shipping!"
+                : "";
+
+    }
+
 }
 
+
+/* =========================
+   CART BUTTONS
+========================= */
 
 cartItems.addEventListener(
     "click",
     event => {
 
-        const id =
-            Number(
-                event.target.dataset.id
+        const increase =
+            event.target.closest(
+                ".increase"
+            );
+
+        const decrease =
+            event.target.closest(
+                ".decrease"
+            );
+
+        const remove =
+            event.target.closest(
+                ".remove-item"
             );
 
 
-        if (!id) return;
+        if (increase) {
 
+            const item =
+                cart.find(
+                    item =>
+                        item.id ===
+                        Number(
+                            increase.dataset.id
+                        )
+                );
 
-        const product =
-            cart.find(
-                item => item.id === id
-            );
+            if (item) {
+                item.quantity++;
+            }
 
-
-        if (
-            event.target.classList
-                .contains("increase")
-        ) {
-
-            product.quantity++;
         }
 
 
-        if (
-            event.target.classList
-                .contains("decrease")
-        ) {
+        if (decrease) {
 
-            product.quantity--;
+            const item =
+                cart.find(
+                    item =>
+                        item.id ===
+                        Number(
+                            decrease.dataset.id
+                        )
+                );
 
 
-            if (product.quantity <= 0) {
+            if (item) {
 
-                cart =
-                    cart.filter(
-                        item =>
-                            item.id !== id
-                    );
+                item.quantity--;
+
+                if (item.quantity <= 0) {
+
+                    cart =
+                        cart.filter(
+                            cartItem =>
+                                cartItem.id !==
+                                item.id
+                        );
+
+                }
 
             }
+
         }
 
 
-        if (
-            event.target.classList
-                .contains("remove-item")
-        ) {
+        if (remove) {
+
+            const id =
+                Number(
+                    remove.dataset.id
+                );
+
 
             cart =
                 cart.filter(
@@ -267,10 +351,6 @@ cartItems.addEventListener(
                         item.id !== id
                 );
 
-
-            showToast(
-                "Product removed from cart"
-            );
         }
 
 
@@ -282,23 +362,58 @@ cartItems.addEventListener(
 );
 
 
-document
-    .getElementById("checkoutButton")
-    .addEventListener(
-        "click",
-        () => {
+/* =========================
+   STORAGE
+========================= */
 
-            showToast(
-                "Checkout will be added next."
-            );
+function saveCart() {
 
-        }
+    localStorage.setItem(
+        "littleStepsCart",
+        JSON.stringify(cart)
     );
+
+}
+
+
+function updateCartCount() {
+
+    const total =
+        cart.reduce(
+            (sum, item) =>
+                sum + item.quantity,
+            0
+        );
+
+
+    cartCount.textContent =
+        total;
+
+}
+
+
+/* =========================
+   CHECKOUT
+========================= */
+
+document.getElementById(
+    "checkoutButton"
+).addEventListener(
+    "click",
+    () => {
+
+        showToast(
+            "Checkout is not connected to a payment system yet."
+        );
+
+    }
+);
 
 
 function showToast(message) {
 
-    toast.textContent = message;
+    toast.textContent =
+        message;
 
     toast.classList.add("show");
 
@@ -311,7 +426,7 @@ function showToast(message) {
             );
 
         },
-        2500
+        2800
     );
 
 }

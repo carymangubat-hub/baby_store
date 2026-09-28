@@ -8,9 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>
-        Shopping Cart | Little Steps
-    </title>
+    <title>Shopping Cart | Little Steps Baby Care</title>
 
     <link rel="preconnect"
           href="https://fonts.googleapis.com">
@@ -34,11 +32,11 @@
     </span>
 
     <span>
-        ♡ Safe. Gentle. Trusted.
+        ♡ Little Steps Baby Care
     </span>
 
     <span>
-        10% Off Your First Order
+        Easy Returns
     </span>
 
 </div>
@@ -56,37 +54,42 @@
             </div>
 
             <div>
-                <h1>Little Steps</h1>
-                <span>BABY CARE</span>
+
+                <h1>
+                    Little Steps
+                </h1>
+
+                <span>
+                    BABY CARE
+                </span>
+
             </div>
 
         </a>
 
 
-        <div class="header-actions">
+        <a
+            href="index.html#products"
+            class="continue-shopping">
 
-            <a href="index.html"
-               class="header-action">
+            ← Continue Shopping
 
-                🏠
-                <span>Home</span>
-
-            </a>
+        </a>
 
 
-            <a href="cart.html"
-               class="header-action cart-link">
+        <a
+            href="cart.html"
+            class="header-action cart-link">
 
-                🛒
-                <span>Cart</span>
+            🛒
 
-                <strong id="cartCount">
-                    0
-                </strong>
+            <span>Cart</span>
 
-            </a>
+            <strong id="cartCount">
+                0
+            </strong>
 
-        </div>
+        </a>
 
     </div>
 
@@ -95,17 +98,15 @@
 
 <main class="cart-page">
 
-    <div class="cart-page-title">
+    <div class="cart-title">
 
         <span class="eyebrow">
             YOUR ORDER
         </span>
 
-        <h1>Shopping Cart</h1>
-
-        <p>
-            Review your products before checkout.
-        </p>
+        <h1>
+            Shopping Cart
+        </h1>
 
     </div>
 
@@ -120,27 +121,27 @@
 
             <div
                 class="empty-cart"
-                id="emptyCart"
-            >
+                id="emptyCart">
 
                 <div class="empty-cart-icon">
                     🛒
                 </div>
 
-                <h2>Your cart is empty</h2>
+                <h2>
+                    Your cart is empty
+                </h2>
 
                 <p>
                     Discover something special
                     for your little one.
                 </p>
 
-                <br>
-
                 <a
                     href="index.html#products"
-                    class="primary-button"
-                >
-                    Continue Shopping
+                    class="primary-button">
+
+                    Start Shopping
+
                 </a>
 
             </div>
@@ -150,15 +151,18 @@
 
         <aside
             class="order-summary"
-            id="orderSummary"
-        >
+            id="orderSummary">
 
-            <h2>Order Summary</h2>
+            <h2>
+                Order Summary
+            </h2>
 
 
-            <div class="summary-row">
+            <div class="summary-line">
 
-                <span>Subtotal</span>
+                <span>
+                    Subtotal
+                </span>
 
                 <strong id="subtotal">
                     ₱0
@@ -167,9 +171,11 @@
             </div>
 
 
-            <div class="summary-row">
+            <div class="summary-line">
 
-                <span>Shipping</span>
+                <span>
+                    Shipping
+                </span>
 
                 <strong id="shipping">
                     ₱0
@@ -178,13 +184,19 @@
             </div>
 
 
-            <div class="summary-divider">
+            <div class="shipping-message"
+                 id="shippingMessage">
             </div>
 
 
-            <div class="summary-row total">
+            <hr>
 
-                <span>Total</span>
+
+            <div class="summary-line total">
+
+                <span>
+                    Total
+                </span>
 
                 <strong id="total">
                     ₱0
@@ -196,17 +208,18 @@
             <button
                 class="checkout-button"
                 id="checkoutButton"
-            >
-                Proceed to Checkout →
+                type="button">
+
+                Proceed to Checkout
+
             </button>
 
 
-            <a
-                href="index.html#products"
-                class="continue-shopping"
-            >
-                ← Continue Shopping
-            </a>
+            <p class="checkout-note">
+
+                🔒 Secure checkout
+
+            </p>
 
         </aside>
 
@@ -221,6 +234,7 @@
 </div>
 
 
+<script src="products.js"></script>
 <script src="cart.js"></script>
 
 </body>
